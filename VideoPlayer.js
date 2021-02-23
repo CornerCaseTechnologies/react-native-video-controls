@@ -855,7 +855,9 @@ export default class VideoPlayer extends Component {
        */
       onPanResponderMove: (evt, gestureState) => {
         let state = this.state;
-        const position = this.state.volumeOffset + gestureState.dx;
+        const position = I18nManager.isRTL
+          ? this.state.volumeOffset - gestureState.dx
+          : this.state.volumeOffset + gestureState.dx;
 
         this.setVolumePosition(position);
         state.volume = this.calculateVolumeFromVolumePosition();
