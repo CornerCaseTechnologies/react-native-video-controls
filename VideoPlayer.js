@@ -1392,12 +1392,14 @@ const styles = {
   }),
   seekbar: StyleSheet.create({
     container: {
+      flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
       alignSelf: 'stretch',
       height: 28,
       marginLeft: 20,
       marginRight: 20,
     },
     track: {
+      flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
       backgroundColor: '#333',
       height: 1,
       position: 'relative',
@@ -1405,23 +1407,26 @@ const styles = {
       width: '100%',
     },
     fill: {
+      flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
       backgroundColor: '#FFF',
       height: 1,
       width: '100%',
     },
     handle: {
+      flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
       position: 'absolute',
       marginLeft: -7,
       height: 28,
       width: 28,
     },
     circle: {
+      flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
       borderRadius: 12,
       position: 'relative',
       top: 8,
       left: 8,
-      height: 12,
-      width: 12,
+      height: 15,
+      width: 15,
     },
   }),
 };
