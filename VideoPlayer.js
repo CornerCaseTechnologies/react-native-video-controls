@@ -1280,6 +1280,9 @@ const styles = {
       height: null,
       width: null,
     },
+    back: {
+      flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
+    },
     column: {
       flexDirection: 'column',
       alignItems: 'center',
