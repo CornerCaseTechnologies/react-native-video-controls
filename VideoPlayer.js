@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Video from 'react-native-video';
 import {
+  I18nManager,
   TouchableWithoutFeedback,
   TouchableHighlight,
   ImageBackground,
@@ -786,7 +787,9 @@ export default class VideoPlayer extends Component {
        * When panning, update the seekbar position, duh.
        */
       onPanResponderMove: (evt, gestureState) => {
-        const position = this.state.seekerOffset + gestureState.dx;
+        const position = I18nManager.isRTL
+          ? this.state.seekerOffset - gestureState.dx
+          : this.state.seekerOffset + gestureState.dx;
         this.setSeekerPosition(position);
         let state = this.state;
 
@@ -854,7 +857,9 @@ export default class VideoPlayer extends Component {
        */
       onPanResponderMove: (evt, gestureState) => {
         let state = this.state;
-        const position = this.state.volumeOffset + gestureState.dx;
+        const position = I18nManager.isRTL
+          ? this.state.volumeOffset - gestureState.dx
+          : this.state.volumeOffset + gestureState.dx;
 
         this.setVolumePosition(position);
         state.volume = this.calculateVolumeFromVolumePosition();
@@ -970,7 +975,6 @@ export default class VideoPlayer extends Component {
         style={styles.controls.back}
       />,
       this.events.onBack,
-      styles.controls.back,
     );
   }
 
@@ -1279,6 +1283,9 @@ const styles = {
       height: null,
       width: null,
     },
+    back: {
+      transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
+    },
     column: {
       flexDirection: 'column',
       alignItems: 'center',
@@ -1331,7 +1338,7 @@ const styles = {
       marginBottom: 0,
     },
     volume: {
-      flexDirection: 'row',
+      flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
     },
     fullscreen: {
       flexDirection: 'row',
@@ -1391,12 +1398,15 @@ const styles = {
   }),
   seekbar: StyleSheet.create({
     container: {
+      transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
+      flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
       alignSelf: 'stretch',
       height: 28,
       marginLeft: 20,
       marginRight: 20,
     },
     track: {
+      flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
       backgroundColor: '#333',
       height: 1,
       position: 'relative',
@@ -1404,23 +1414,26 @@ const styles = {
       width: '100%',
     },
     fill: {
+      flexDirection: 'row-reverse',
       backgroundColor: '#FFF',
       height: 1,
       width: '100%',
     },
     handle: {
+      flexDirection: I18nManager.isRTL ? 'row' : 'row-reverse',
       position: 'absolute',
       marginLeft: -7,
       height: 28,
       width: 28,
     },
     circle: {
+      flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
       borderRadius: 12,
       position: 'relative',
       top: 8,
       left: 8,
-      height: 12,
-      width: 12,
+      height: 15,
+      width: 15,
     },
   }),
 };
