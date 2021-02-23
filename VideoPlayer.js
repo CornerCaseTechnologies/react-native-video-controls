@@ -971,7 +971,6 @@ export default class VideoPlayer extends Component {
         style={styles.controls.back}
       />,
       this.events.onBack,
-      styles.controls.back,
     );
   }
 
