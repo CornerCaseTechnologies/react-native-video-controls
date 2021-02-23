@@ -1281,7 +1281,7 @@ const styles = {
       width: null,
     },
     back: {
-      flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
+      transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
     },
     column: {
       flexDirection: 'column',
