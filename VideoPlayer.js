@@ -787,7 +787,9 @@ export default class VideoPlayer extends Component {
        * When panning, update the seekbar position, duh.
        */
       onPanResponderMove: (evt, gestureState) => {
-        const position = this.state.seekerOffset + gestureState.dx;
+        const position = I18nManager.isRTL
+          ? this.state.seekerOffset - gestureState.dx
+          : this.state.seekerOffset + gestureState.dx;
         this.setSeekerPosition(position);
         let state = this.state;
 
@@ -1396,6 +1398,7 @@ const styles = {
   }),
   seekbar: StyleSheet.create({
     container: {
+      transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
       flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
       alignSelf: 'stretch',
       height: 28,
@@ -1411,13 +1414,13 @@ const styles = {
       width: '100%',
     },
     fill: {
-      flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
+      flexDirection: 'row-reverse',
       backgroundColor: '#FFF',
       height: 1,
       width: '100%',
     },
     handle: {
-      flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
+      flexDirection: I18nManager.isRTL ? 'row' : 'row-reverse',
       position: 'absolute',
       marginLeft: -7,
       height: 28,
